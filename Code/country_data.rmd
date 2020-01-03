@@ -156,3 +156,45 @@ Eliminamos también el atributo “Infant.Mortality.per1000births”. Como dispo
 country_data <- country_data[, -(6)]
 ```
 
+## Renombrar las columnas
+
+Una última operación que vamos a realizar antes de finalizar la fase de limpieza de los datos es la de cambiar el nombre de las columnas, para facilitar el uso de las variables durante la fase de análisis. 
+
+```{r, echo=TRUE}
+colnames (country_data) <- c("Country", "Region", "Population", "Area", "Net_migration", "GDP_per_capita", "Literacy_rate", "Birthrate", "Deathrate", "Unemployment_rate", "Infant_mortality", "GDP", "Main_sector")
+```
+
+## Valores extremos
+
+Los valores extremos son aquellos valores que se encuentran muy alejados de la distribución normal de una variable. Estos valores pueden aparecer por distintos motivos y pueden ser indicadores de que hay algún error en los datos que puede afectar al resultado de los análisis.
+
+Vamos a aplicar la función boxplot.stats() de R, en aquellas variables en que los valores extremos puedan ser indicadores. 
+
+```{r, echo=TRUE}
+boxplot.stats(country_data$Net_migration)$out
+boxplot.stats(country_data$GDP_per_capita)$out
+boxplot.stats(country_data$Literacy_rate)$out
+boxplot.stats(country_data$Birthrate)$out
+boxplot.stats(country_data$Deathrate)$out
+boxplot.stats(country_data$Unemployment_rate)$out
+boxplot.stats(country_data$Infant_mortality)$out
+```
+
+Para tomar una decisión acerca de como tratar estos valores, es útil visualizar de forma gráfica estos valores. Por tanto, vamos a generar un boxplot para cada variable con valores extremos. Vamos a distribuir los valores en función de la región ya que esto nos dará una mejor idea sobre si un valor extremo puede darse en realidad o no. 
+
+```{r, echo=TRUE}
+boxplot(country_data$GDP_per_capita ~ country_data$Region, data = country_data, main = "PIB per cápita por zona", xlab = "Región", 
+ylab= "PIB per cápita")
+
+boxplot(country_data$Literacy_rate ~ country_data$Region, data = country_data, main = "Tasa de alfabetización por zona", xlab = "Región", ylab= "Tasa de alfabetización")
+
+boxplot(country_data$Deathrate ~ country_data$Region, data = country_data, main = "Tasa de mortalidad por zona", xlab = "Región", ylab= "Tasa de mortalidad")
+
+boxplot(country_data$Unemployment_rate ~ country_data$Region, data = country_data, main = "Tasa de desempleo por zona", xlab = "Región", ylab= "Tasa de desempleo")
+
+boxplot(country_data$Literacy_rate ~ country_data$Region, data = country_data, main = "Tasa de alfabetización por zona", xlab = "Región", ylab= "Tasa de alfabetización")
+
+boxplot(country_data$Infant_mortality ~ country_data$Region, data = country_data, main = "Tasa de mortalidad por zona", xlab = "Región", ylab= "Tasa de mortalidad infantil")
+
+boxplot(country_data$Net_migration ~ country_data$Region, data = country_data, main = "Tasa migratoria por zona", xlab = "Región", ylab= "Tasa migratoria")
+```
