@@ -198,3 +198,19 @@ boxplot(country_data$Infant_mortality ~ country_data$Region, data = country_data
 
 boxplot(country_data$Net_migration ~ country_data$Region, data = country_data, main = "Tasa migratoria por zona", xlab = "Región", ylab= "Tasa migratoria")
 ```
+
+## Tratar los valores extremos
+
+La mayoría de valores señalados como extremos son posibles (ver archivo respuestas para más detalles). Sí que hemos detectado valores extremos en las variables "Unemployment_rate" y "Net_migration".
+
+
+```{r, echo=TRUE}
+country_data$Unemployment_rate[227] <- 4.2
+country_data$Unemployment_rate[32] <- 3.4
+country_data$Unemployment_rate[56] <- 13.0
+country_data$Unemployment_rate[181] <- 8.0
+
+country_data$Net.migration[224] <- -3.5
+```
+
+
