@@ -219,3 +219,19 @@ country_data$Net.migration[224] <- -3.5
 ```{r, echo=TRUE}
 write.csv(country_data, "country_data.csv")
 ```
+
+
+## Selección de los grupos de datos a analizar
+
+```{r, echo=TRUE}
+country_data.asia <- country_data[country_data$Region == "ASIA (EX.NEAR EAST)",]
+country_data.africa_norte <- country_data[country_data$Region == "NORTHERN AFRICA",]
+country_data.oceania <- country_data[country_data$Region == "OCEANIA",]
+country_data.europa <- country_data[country_data$Region == "WESTERN EUROPE",]
+country_data.africa <- country_data[country_data$Region == "SUB-SAHARAN AFRICA",]
+country_data.sudamerica <- country_data[country_data$Region == "LATIN AMER. & CARIB",]
+country_data.medio_oriente <- country_data[country_data$Region == "NEAR EAST",]
+country_data.norteamerica <- country_data[country_data$Region == "NORTHERN AMERICA",]
+country_data.europa_este <- country_data[country_data$Region == "EASTERN EUROPE" | country_data$Region == "C.W. OF IND. STATES" | country_data$Region == "BALTICS",]
+```
+
