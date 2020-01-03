@@ -223,6 +223,8 @@ write.csv(country_data, "country_data.csv")
 
 ## Selección de los grupos de datos a analizar
 
+En nuestro caso, puede ser interesante comparar la situación entre distintas regiones. Podemos crear un grupo para cada región mediante los siguientes comandos:
+
 ```{r, echo=TRUE}
 country_data.asia <- country_data[country_data$Region == "ASIA (EX.NEAR EAST)",]
 country_data.africa_norte <- country_data[country_data$Region == "NORTHERN AFRICA",]
@@ -235,3 +237,13 @@ country_data.norteamerica <- country_data[country_data$Region == "NORTHERN AMERI
 country_data.europa_este <- country_data[country_data$Region == "EASTERN EUROPE" | country_data$Region == "C.W. OF IND. STATES" | country_data$Region == "BALTICS",]
 ```
 
+De la misma manera, una comparación interesante es la de los países en función de su PIB y su producto interior bruto per cápita. 
+
+```{r, echo=TRUE}
+country_data.PIB_pc_alto <- country_data[country_data$GDP_per_capita > 9660,]
+country_data.PIB_pc_bajo <- country_data[country_data$GDP_per_capita < 9660,]
+
+country_data.PIB_alto <- country_data[country_data$GDP > 20000,]
+country_data.PIB_bajo <- country_data[country_data$GDP < 20000,]
+
+```
