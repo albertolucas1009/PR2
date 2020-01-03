@@ -270,3 +270,18 @@ for (i in 1:ncol(country_data)){
  }
 
 ```
+
+## Comprobación de la homocedasticidad
+
+La siguiente prueba que vamos a realizar es la de la homogeneidad de varianzas mediante la aplicación de la prueba de Fligner-Killen. El test de Fligner-Killen es el más adecuado, ya que como hemos visto anteriormente, las variables no cumplen la condición de normalidad. 
+
+```{r, echo=TRUE}
+fligner.test (Net_migration ~ Region, data = country_data)
+fligner.test (GDP_per_capita ~ Region, data = country_data)
+fligner.test (Literacy_rate ~ Region, data = country_data)
+fligner.test (Birthrate ~ Region, data = country_data)
+fligner.test (Deathrate ~ Region, data = country_data)
+fligner.test (Unemployment_rate ~ Region, data = country_data)
+fligner.test (Infant_mortality ~ Region, data = country_data)
+
+```
