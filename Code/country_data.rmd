@@ -245,5 +245,28 @@ country_data.PIB_pc_bajo <- country_data[country_data$GDP_per_capita < 9660,]
 
 country_data.PIB_alto <- country_data[country_data$GDP > 20000,]
 country_data.PIB_bajo <- country_data[country_data$GDP < 20000,]
+```
+
+
+## Comprobación de la normalidad
+
+El siguiente de la fase analítica será comprobar si las variables cuantitativas de nuestro conjunto de datos siguen una distribución normal.Para esta comprobación usamos la prueba de normalidad Anderson-Darling, fijando como nivel de significación 0.05.
+
+```{r, echo=TRUE}
+alpha = 0.5
+col.names = colnames(country_data)
+
+for (i in 1:ncol(country_data)){
+    if (i == 1) cat("Variables que no siguen una distribución normal:\n")
+    if(is.integer(country_data[,i]) | is.numeric (country_data[,i])) {
+        p_val = ad.test(country_data[,i])$p.value
+        if (p_val < alpha) {
+            cat(col.names[i])
+            
+        if (i < ncol(country_data) - 1) cat(",")
+        if (i %% 3 == 0) cat("\n")
+        }
+     }
+ }
 
 ```
