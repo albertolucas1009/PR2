@@ -214,3 +214,8 @@ country_data$Net.migration[224] <- -3.5
 ```
 
 
+## Exportación de los datos preprocesados:
+
+```{r, echo=TRUE}
+write.csv(country_data, "country_data.csv")
+```
