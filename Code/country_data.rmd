@@ -115,4 +115,44 @@ country_data$Infant.mortality[224] <- 50.5
 
 ## Reducción de la dimensionalidad
 
+Vamos a crear un nuevo atributo que indique el cuál es el sector más importante en la economía de un país, que va a reemplazar las tres variables que indican el peso de cada sector económico. 
+
+```{r, echo=TRUE}
+country_data$Main_sector <- ifelse ((country_data$Agriculture > country_data$Industry) & (country_data$Agriculture > country_data$Service), "Primario", 
+ifelse((country_data$Industry > country_data$Agriculture) & (country_data$Industry > country_data$Service), "Secundario",
+ifelse((country_data$Service > country_data$Agriculture) & (country_data$Service > country_data$Industry), "Terciario", "Desconocido")))
+```
+
+Una vez hecho esto, hay varias observaciones para las que no tenemos valor. Sin embargo, es posible encontrar cuál es el sector más importante en la economía de cada país y completar nuestro conjunto de datos. 
+
+```{r, echo=TRUE}
+country_data$Main_sector[4] <- "Primario"
+country_data$Main_sector[5] <- "Terciario"
+country_data$Main_sector[79] <- "Terciario"
+country_data$Main_sector[81] <- "Secundario"
+country_data$Main_sector[84] <- "Terciario"
+country_data$Main_sector[135] <- "Primario"
+country_data$Main_sector[139] <- "Terciario"
+country_data$Main_sector[141] <- "Terciario"
+country_data$Main_sector[145] <- "Terciario"
+country_data$Main_sector[154] <- "Secundario"
+country_data$Main_sector[172] <- "Primario"
+country_data$Main_sector[175] <- "Terciario"
+country_data$Main_sector[178] <- "Terciario"
+country_data$Main_sector[209] <- "Terciario"
+country_data$Main_sector[222] <- "Primario"
+country_data$Main_sector[224] <- "Primario"
+```
+
+Una vez hecho esto, podemos eliminar los atributos “agriculture, industry, service” ya que una vez creado el atributo “Main_sector”, esta información resulta redundante para nuestro análisis.
+
+```{r, echo=TRUE}
+country_data <- country_data[, -(10:12)]
+```
+
+Eliminamos también el atributo “Infant.Mortality.per1000births”. Como disponemos de un atributo denominado “Infant.Mortality” que mide el mismo factor, es redundante conservar las dos variables. 
+
+```{r, echo=TRUE}
+country_data <- country_data[, -(6)]
+```
 
