@@ -33,3 +33,86 @@ country_data <- country_data[, -(10:14)]
 ```
 
 ## Tratamiento de nulos y ceros
+
+Hay variables con gran cantidad de valores nulos y otras con muy pocos. Por lo tanto, utilizaremos una estrategia diferente para tratar los valores nulos de cada variable. Así pues, vamos analizando atributo por atributo:
+
+1. GDP_MILLION_$:
+
+Hay muchos valores ausentes para esta variable. Sin embargo, podemos calcular este atributo fácilmente a partir de otras variables de nuestro conjunto de datos. Concretamente, vamos a multiplicar el producto interior bruto per cápita de un país por su número de habitantes para obtener el producto interior bruto del país. 
+
+```{r, echo=TRUE}
+country_data$GDP <- as.integer((country_data$GDP....per.capita. * country_data$Population)/ 1000000)
+country_data <- country_data[, -(7)]
+```
+
+2. GDP ($ per capita): 
+
+Sólo 1 valor ausente. Como es una única observación, no supone un esfuerzo excesivo hallar el valor del este atributo y asignárselo.
+
+```{r, echo=TRUE}
+country_data$GDP....per.capita.[224]<- 2500
+```
+
+3. Literacy:
+
+En este caso vamos a utilizar el método de kNN, del paquete VIM, un método de imputación de valores basado en la similitud entre las observaciones.
+
+```{r, echo=TRUE}
+suppressWarnings (suppressMessages (library(VIM)))
+country_data$Literacy_rate <- kNN(country_data)$Literacy_rate
+```
+
+4. Birthrate:
+
+Como sólo hay 3 observaciones sin valor, es razonable buscar estos valores y añadirlos al conjunto de datos.
+
+
+```{r, echo=TRUE}
+country_data$Birthrate[182] <- 9.2
+country_data$Birthrate[222] <- 5.5
+country_data$Birthrate[182] <- 28.9
+```
+
+5. Deathrate:
+
+Aplicamos de nuevo la técnica anterior de encontrar la información que necesitamos y aplicarla a nuestro conjunto de datos.
+
+```{r, echo=TRUE}
+country_data$Deathrate[48] <- 8.6
+country_data$Deathrate[182] <- 13.2
+country_data$Deathrate[222] <- 5.5
+country_data$Deathrate[224] <- 11.49
+```
+
+6. Unemployment:
+
+Como se ha hecho anteriormente, reemplazamos los valores nulos utilizando Knn.
+
+```{r, echo=TRUE}
+country_data$Unemployment_rate <- kNN(country_data)$Unemployment_rate
+```
+
+7. Net_migration:
+
+De nuevo para este atributo, disponemos sólo de 3 observaciones sin valor. Vamos a encontrar la información necesaria e introducir los valores para la observación correspondiente. 
+
+```{r, echo=TRUE}
+country_data$Net.migration[48] <- -2.2
+country_data$Net.migration[222] <- -4.6
+country_data$Net.migration[224] <- 5.4
+```
+
+8. Infant_mortality
+
+Como en los casos anteriores buscamos la información necesaria y la insertamos en el dataframe.
+
+```{r, echo=TRUE}
+country_data$Infant.mortality[48] <- 12.6
+country_data$Infant.mortality[222] <- 4.3
+country_data$Infant.mortality[224] <- 50.5
+```
+
+
+## Reducción de la dimensionalidad
+
+
