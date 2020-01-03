@@ -4,3 +4,32 @@ library(VIM)
 library(nortest)
 
 ```
+
+****
+# Limpieza de datos
+****
+
+## Importación del dataset
+
+```{r, echo=TRUE}
+country_data <- read.csv ("initial_dataset.csv", header = TRUE, dec=",")
+```
+
+## Tipos de variables
+
+Observamos qué tipo asigna R a cada variable. Como se puede ver disponemos de varias variables numéricas, así como algunas variables a las que R les ha asignado el tipo factor.
+
+```{r, echo=TRUE}
+sapply(country_data, function(x) class(x))
+```
+
+## Selección de variables
+
+Para el análisis que vamos a realizar podemos prescindir de varios atributos que están más relacionados con factores geográficos de un país que con indicadores estrictamente económicos. Por tanto, prescindimos de varios atributos.
+
+```{r, echo=TRUE}
+country_data <- country_data[,-(5:6)]
+country_data <- country_data[, -(10:14)]
+```
+
+## Tratamiento de nulos y ceros
