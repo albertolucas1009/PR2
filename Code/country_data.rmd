@@ -320,9 +320,6 @@ wilcox.test (Net_migration) ~ GDP_pc_category, data = coountry_data)
 
 matrix_eureste <- matrix (nc = 2, nr = 0)
 colnames (matrix_eureste) <- c("estimate", "p-value)
-``` 
-
-```{r, echo=TRUE}
 
 # Calculamos el coeficiente de correlación para cada variable cualitativa con respecto a la tase de migración 
 
@@ -357,4 +354,29 @@ print (matrix_eureste)
 plot (country_data.europa_este$GDP, country_data.europa_este$Net_migration, xlab = "PIB", ylab = "Tasa de inmigración")
 abline (lm (country_data.europa_este$Net_migration ~ country_data.europa_este$GDP), col = "red")
 
+```
+
+## SUDAMÉRICA
+
+```{r, echo=TRUE}
+
+matrix_sud <- matrix (nc = 2, nr = 0)
+colnames (matrix_sud) <- c("estimate", "p-value)
+
+for (i in 1:(ncol(country_data.sudamerica) - 1)) {
+    if (is.integer (country_data.sudamerica[,i]) | is.numeric (country_data.sudamerica[,i])) {
+        spearman_test = cor.test (country_data.sudamerica[,i], country_data.sudamerica[,5], method = "spearman")
+        corr_coef = spearman_test$estimate
+        p_val = spearman_test$p.value  
+        
+        
+pair = matrix(ncol = 2, nrow = 1)
+pair[1][1] = corr_coef
+pair[2][1] = p_val
+matrix_sud <- rbind(matrix_sud, pair)
+rownames (matrix_sud) [nrow(matrix_sud)] <- colnames (country_data.sudamerica) [i]
+    }
+}
+
+print (matrix_sud)
 ```
