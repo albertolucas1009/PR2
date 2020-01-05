@@ -322,7 +322,7 @@ matrix_eureste <- matrix (nc = 2, nr = 0)
 colnames (matrix_eureste) <- c("estimate", "p-value)
 
 ``` 
-# Calculamos el coeficiente de correlación para cada variable cualitativa con respecto a la tase de migración 
+# Calculamos el coeficiente de correlación para cada variable cualitativa con respecto a la tase de migración #
 
 ```{r, echo=TRUE}
 
