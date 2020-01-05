@@ -289,3 +289,54 @@ fligner.test (Infant_mortality ~ Region, data = country_data)
 
 fligner.test (Net_migration ~ Region, data = country_data.europa_este)
 ```
+
+
+## PRUEBAS ESTADÍSTICAS
+
+El primer análisis será comprobar si se puede demostrar estadísticamente que la tasa de inmigración es diferente según el PIB y el PIB per cápita de cada país. 
+
+Categorizamos los países según su PIB y su PIB per cápita.
+
+```{r, echo=TRUE}
+country_data$GDP_category <- ifelse ((country_data$GDP > 20000), "Alto",
+ifelse((country_data$GDP < 20000), "Bajo", "Desconocido"))
+
+country_data$GDP_pc_category <- ifelse ((country_data$GDP_per_capita > 9660), "Alto", 
+ifelse ((country_data$GDP_per_Capita < 9660), "Bajo", "Desconocido"))
+
+## Realizamos la preba estadísitica de Wilcox
+
+wilcox.test (Net_migration ~ GDP_category, data = country_data)
+wilcox.test (Net_migration) ~ GDP_pc_category, data = coountry_data)
+
+```
+
+## Hallar las variables con más influencia sobre la tasa de migración de cada región
+
+## EUROPA DEL ESTE
+
+```{r, echo=TRUE}
+# Creamos una matriz que muestre el nivel de correlación de cada variable con la tasa de migración
+
+matrix_eureste <- matrix (nc = 2, nr = 0)
+colnames (matrix_eureste) <- c("estimate", "p-value)
+
+# Calculamos el coeficiente de correlación para cada variable cualitativa con respecto a la tase de migración mediante la función cor.test()
+
+for (i in 1:(ncol(country_data.europa_este) - 1)) {
+    if (is.integer (country_data.europa_este[,i]) | is.numeric (country_data.europa_este[,i])) {
+        spearman_test = cor.test (country_data.europa_este[,i], country_data.europa_este[,5], method = "spearman")
+        corr_coef = spearman_test$estimate
+        p_val = spearman_test$p.value
+        
+# Introducimos los valores en la matriz y la visualizamos
+
+pair = matrix(ncol = 2, nrow = 1)
+pair[1][1] = corr_coef
+pair[2][1] = p_val
+matrix_eureste <- rbind(matrix_eureste, pair)
+rownames (matrix_eureste) [nrow(matrix_eureste)] <- colnames (country_data.europa_este) [i]
+    }
+}
+
+```
