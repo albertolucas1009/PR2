@@ -319,7 +319,7 @@ wilcox.test (Net_migration) ~ GDP_pc_category, data = coountry_data)
 # Creamos una matriz que muestre el nivel de correlación de cada variable con la tasa de migración
 
 matrix_eureste <- matrix (nc = 2, nr = 0)
-colnames (matrix_eureste) <- c("estimate", "p-value)
+colnames (matrix_eureste) <- c("estimate", "p-value")
 
 # Calculamos el coeficiente de correlación para cada variable cualitativa con respecto a la tase de migración 
 
@@ -358,10 +358,12 @@ abline (lm (country_data.europa_este$Net_migration ~ country_data.europa_este$GD
 
 ## SUDAMÉRICA
 
+Repetimos toda la operación anterior para Sudamérica
+
 ```{r, echo=TRUE}
 
 matrix_sud <- matrix (nc = 2, nr = 0)
-colnames (matrix_sud) <- c("estimate", "p-value)
+colnames (matrix_sud) <- c("estimate", "p-value")
 
 for (i in 1:(ncol(country_data.sudamerica) - 1)) {
     if (is.integer (country_data.sudamerica[,i]) | is.numeric (country_data.sudamerica[,i])) {
@@ -379,4 +381,34 @@ rownames (matrix_sud) [nrow(matrix_sud)] <- colnames (country_data.sudamerica) [
 }
 
 print (matrix_sud)
+
+plot (country_data.sudamerica$Net_migration, country_data.sudamerica$Deathrate, xlab = "Tasa de migración", ylab = "Tasa de mortalidad")
+abline (lm (country_data.sudamerica$Deathrate ~ country_data.sudamerica$Net?migration), col = "red")
+```
+
+ ## ÁFRICA
+ 
+ Y de nuevo repetimos el proceso para los países de África subsahariana
+ 
+ ```{r, echo=TRUE}
+
+matrix_africa <- matrix (nc = 2, nr = 0)
+colnames (matrix_africa) <- c("estimate", "p-value")
+
+for (i in 1:(ncol(country_data.africa) - 1)) {
+    if (is.integer (country_data.africa[,i]) | is.numeric (country_data.africa[,i])) {
+        spearman_test = cor.test (country_data.africa[,i], country_data.africa[,5], method = "spearman")
+        corr_coef = spearman_test$estimate
+        p_val = spearman_test$p.value  
+
+pair = matrix(ncol = 2, nrow = 1)
+pair[1][1] = corr_coef
+pair[2][1] = p_val
+matrix_africa <- rbind(matrix_africa, pair)
+rownames (matrix_africa) [nrow(matrix_africa)] <- colnames (country_data.africa) [i]
+    }
+}
+
+print (matrix_africa)
+
 ```
