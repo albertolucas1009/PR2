@@ -284,4 +284,8 @@ fligner.test (Deathrate ~ Region, data = country_data)
 fligner.test (Unemployment_rate ~ Region, data = country_data)
 fligner.test (Infant_mortality ~ Region, data = country_data)
 
+
+## Comprobamos los homocedasticidad para las regiones de Europa del Este
+
+fligner.test (Net_migration ~ Region, data = country_data.europa_este)
 ```
