@@ -321,7 +321,7 @@ wilcox.test (Net_migration) ~ GDP_pc_category, data = coountry_data)
 matrix_eureste <- matrix (nc = 2, nr = 0)
 colnames (matrix_eureste) <- c("estimate", "p-value)
 
-# Calculamos el coeficiente de correlación para cada variable cualitativa con respecto a la tase de migración mediante la función cor.test()
+## Calculamos el coeficiente de correlación para cada variable cualitativa con respecto a la tase de migración mediante la función ##cor.test()
 
 for (i in 1:(ncol(country_data.europa_este) - 1)) {
     if (is.integer (country_data.europa_este[,i]) | is.numeric (country_data.europa_este[,i])) {
@@ -329,7 +329,7 @@ for (i in 1:(ncol(country_data.europa_este) - 1)) {
         corr_coef = spearman_test$estimate
         p_val = spearman_test$p.value
         
-# Introducimos los valores en la matriz y la visualizamos
+## Introducimos los valores en la matriz y la visualizamos
 
 pair = matrix(ncol = 2, nrow = 1)
 pair[1][1] = corr_coef
