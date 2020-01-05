@@ -339,4 +339,13 @@ rownames (matrix_eureste) [nrow(matrix_eureste)] <- colnames (country_data.europ
     }
 }
 
+## Mostramos la tabla de correlación de las variables
+
+print (matrix_eureste)
+
+## Representamos el modelo de regresión entre la tasa de migración y la variable con más influencia
+
+plot (country_data.europa_este$GDP, country_data.europa_este$Net_migration, xlab = "PIB", ylab = "Tasa de inmigración")
+abline (lm (country_data.europa_este$Net_migration ~ country_data.europa_este$GDP), col = "red")
+
 ```
