@@ -330,10 +330,12 @@ for (i in 1:(ncol(country_data.europa_este) - 1)) {
     if (is.integer (country_data.europa_este[,i]) | is.numeric (country_data.europa_este[,i])) {
         spearman_test = cor.test (country_data.europa_este[,i], country_data.europa_este[,5], method = "spearman")
         corr_coef = spearman_test$estimate
-        p_val = spearman_test$p.value
-      
+        p_val = spearman_test$p.value     
+```
 
 # Introducimos los valores en la matriz y la visualizamos
+
+```{r, echo=TRUE}
 
 pair = matrix(ncol = 2, nrow = 1)
 pair[1][1] = corr_coef
@@ -342,8 +344,11 @@ matrix_eureste <- rbind(matrix_eureste, pair)
 rownames (matrix_eureste) [nrow(matrix_eureste)] <- colnames (country_data.europa_este) [i]
     }
 }
+```
 
 # Mostramos la tabla de correlación de las variables
+
+```{r, echo=TRUE}
 
 print (matrix_eureste)
 
