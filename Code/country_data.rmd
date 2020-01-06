@@ -507,3 +507,48 @@ colnames(tabla.coeficientes) <- c("Modelo", "coeficiente")
 tabla.coeficientes
  
 ```
+
+## ÁFRICA 
+
+ ```{r, echo=TRUE}
+ 
+# Renombramos las variables para faciliar el proceso
+ 
+# Variable a predecir
+
+ tasa_migracion = country_data.africa$Net_migration
+
+# Variables cuantitativas con mayor coeficiente de correlación con respecto a la tasa migratoria
+
+PIB = country_data.africa$GDP
+PIB_per_capita = country_data.africa$GDP_per_capita
+mortalidad_infantil = country_data.africa$Infant_mortality
+tasa_desempleo = country_data.africa$Unemployment_rate
+tasa_nacimientos = country_data.africa$Birthrate
+tasa_alfabetizacion = country_data.africa$Literacy_rate
+tasa_mortalidad = country_data.africa$Deathrate
+
+# Regresos cualitativos
+
+sector_economico = country_data.africa$Main_sector
+
+# Creamos tres modelos para seleccionar el que tenga mayor coeficiente de determinación
+
+modelo1_afr <- lm(tasa_migracion ~ PIB + PIB_per_capita + mortalidad_infantil + tasa_desempleo + tasa_nacimientos +tasa_alfabetizacion + tasa_mortalidad + sector_economico, data = country_data.africa)
+
+modelo2_afr <- lm(tasa_migracion ~ PIB + PIB_per_capita + mortalidad_infantil + tasa_nacimientos + tasa_mortalidad + sector_economico, data = country_data.africa)
+
+modelo3_afr <- lm(tasa_migracion ~ PIB + PIB_per_capita + mortalidad_infantil, data = country_data.africa)
+
+# Representamos los coeficientes de determinación de cada modelo para ver cuál es el mejor
+
+tabla.coeficientes <- matrix(c(1, summary(modelo1_afr)$r.squared, 
+                     2, summary(modelo2_afr)$r.squared, 
+                      3, summary(modelo3_afr)$r.squared), 
+                      ncol = 2, byrow = TRUE)
+
+colnames(tabla.coeficientes) <- c("Modelo", "coeficiente")
+
+tabla.coeficientes
+
+ ```
