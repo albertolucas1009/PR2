@@ -383,7 +383,7 @@ rownames (matrix_sud) [nrow(matrix_sud)] <- colnames (country_data.sudamerica) [
 print (matrix_sud)
 
 plot (country_data.sudamerica$Net_migration, country_data.sudamerica$Deathrate, xlab = "Tasa de migración", ylab = "Tasa de mortalidad")
-abline (lm (country_data.sudamerica$Deathrate ~ country_data.sudamerica$Net?migration), col = "red")
+abline (lm (country_data.sudamerica$Deathrate ~ country_data.sudamerica$Net_migration), col = "red")
 ```
 
  ## ÁFRICA
@@ -411,4 +411,53 @@ rownames (matrix_africa) [nrow(matrix_africa)] <- colnames (country_data.africa)
 
 print (matrix_africa)
 
+plot (country_data.africa$Net_migration, country_data.africa$Literacy_rate, xlab = "Tasa de migración", ylab = "Tasa de alfabetización")
+abline (lm (country_data.africa$Literacy_rate ~ country_data.africa$Net_migration), col = "red")
+
 ```
+
+## Creación de los modelos de regresión lineal
+
+## EUROPA DEL ESTE
+
+ ```{r, echo=TRUE}
+ 
+ # Renombramos las variables para faciliar el proceso
+ 
+# Variable a predecir
+
+tasa_migracion = country_data.europa_este$Net_migration
+
+# Variables cuantitativas con mayor coeficiente de correlación con respecto a la tasa migratoria
+
+ PIB_per_capita = country_data.europa_este$GDP_per_capita 
+ PIB = country_data.europa_este$GDP
+ mortalidad_infantil = country_data.europa_este$Infant_mortality
+ tasa_desempleo = country_data.europa_este$Unemployment_rate
+ tasa_nacimientos = country_data.europa_este$Birthrate
+ tasa_alfabetizacion = country_data.europa_este$Literacy_rate
+ tasa_mortalidad = country_data.europa_este$Deathrate
+ 
+ # Regresos cualitativos
+ sector_economico = country_data.europa_este$Main_sector
+ 
+# Creamos tres modelos para seleccionar el que tenga mayor coeficiente de determinación
+
+modelo1_eureste <- lm(tasa_migracion ~ PIB + PIB_per_capita + mortalidad_infantil + tasa_desempleo + tasa_nacimientos + tasa_alfabetizacion + tasa_mortalidad + sector_economico, data = country_data.europa_este)
+
+modelo2_eureste <- lm(tasa_migracion ~ PIB + PIB_per_capita + mortalidad_infantil + tasa_nacimientos + tasa_mortalidad, data = country_data.europa_este)
+
+modelo3_eureste <- lm(tasa_migracion ~ PIB + PIB_per_capita + mortalidad_infantil, data = country_data.europa_este)
+
+# Representamos los coeficientes de determinación de cada modelo para ver cuál es el mejor
+
+tabla.coeficientes <- matrix(c(1, summary(modelo1_eureste)$r.squared, 
+                    2, summary(modelo2_eureste)$r.squared, 
+                    3, summary(modelo3_eureste)$r.squared), 
+                    ncol = 2, byrow = TRUE)
+ 
+colnames(tabla.coeficientes) <- c("Modelo", "coeficiente")
+
+tabla.coeficientes
+ 
+ ```
