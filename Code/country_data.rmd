@@ -12,7 +12,7 @@ library(nortest)
 ## Importación del dataset
 
 ```{r, echo=TRUE}
-country_data <- read.csv ("initial_dataset.csv", header = TRUE, dec=",")
+country_data <- read.csv ("../Data/initial_dataset.csv", header = TRUE, dec=",")
 ```
 
 ## Tipos de variables
