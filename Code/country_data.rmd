@@ -552,3 +552,31 @@ colnames(tabla.coeficientes) <- c("Modelo", "coeficiente")
 tabla.coeficientes
 
  ```
+
+## Representación gráfica del modelo de regresión de cada región
+
+ ```{r, echo=TRUE}
+
+plot (modelo1_eureste)
+plot (modelo1_sud)
+plot (modelo1_afr)
+
+```
+
+## Realizar predicciones a partir del modelo creado
+
+```{r, echo=TRUE}
+
+albania_new <- data.frame(PIB = 130400, PIB_per_capita = 4538, mortalidad_infantil= 7.8, tasa_desempleo = 13.8, tasa_nacimientos = 13.2, tasa_alfabetizacion = 97.6, tasa_mortalidad = 6.9, sector_economico = "Terciario")
+
+predict (modelo1_eureste, albania_new)
+
+ecuador_new <- data.frame(PIB = 189750, PIB_per_capita = 11500, mortalidad_infantil= 15.9, tasa_desempleo = 4.6, tasa_nacimientos = 17.6, tasa_alfabetizacion = 96.1, tasa_mortalidad = 5.1, sector_economico = "Secundario")
+
+predict (modelo1_sud, ecuador_new)
+
+nigeria_new <- data.frame(PIB = 119992, PIB_per_capita = 910, mortalidad_infantil= 98.0, tasa_desempleo = 12.5, tasa_nacimientos = 40.43, tasa_alfabetizacion = 68.0, tasa_mortalidad = 16.94, sector_economico = "Secundario")
+ 
+predict (modelo1_afr, nigeria_new)
+
+```
