@@ -18,3 +18,8 @@ Alberto Lucas Navío
 Los conjuntos de datos iniciales se han integrado en único fichero llamado "initial_stage.csv". Éste se puede encontrar aquí: https://github.com/albertolucas1009/PR2/tree/master/Data
 
 Así mismo, tras la etapa de limpieza de valores nulos y valores extremos se genera un nuevo fichero llamado "country_data.csv", que se puede encontrar en la misma ubicación.
+
+
+## Código
+
+El código R está incluído 
