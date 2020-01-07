@@ -22,4 +22,6 @@ Así mismo, tras la etapa de limpieza de valores nulos y valores extremos se gen
 
 ## Código
 
-El código R está incluído 
+El código R se puede encontrar en el fichero "PR2_code" de la siguiente ubicación: https://github.com/albertolucas1009/PR2/tree/master/Code
+
+En la misma localización se puede encontrar un fichero rmd que contiene el mismo código comentado de forma más amplia.  
