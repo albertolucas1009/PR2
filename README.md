@@ -12,3 +12,7 @@ Alberto Lucas Navío
     •	Este Proyecto está realizado en el lenguaje estadístico R.
     •	Consultora: Mireia Calvo González
 
+
+## Dataset 
+
+Los conjuntos de datos iniciales se han integrado en único fichero llamado "initial_stage.csv". Éste se puede encontrar aquí
